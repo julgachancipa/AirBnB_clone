@@ -18,34 +18,30 @@ class FileStorage():
         """
         Return the dictionary __objects
         """
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """
         Set objects
         """
-        key = str(obj.__class__.__name__) + '.' + str(obj.id)
-        value = obj.to_dict()
-        self.__objects[key] = value
-        print(self.__objects)
-
+        FileStorage.__objects[obj.__class__.__name__ + '.' + obj.id] = obj
 
     def save(self):
         """
         Save the serializes of objects in JSON file
         """
         dict1 = {}
-        for key, val in self.__objects.items():
-            dict1[key] = str(val)
-
-        print(dict1)
-        with open(self.__file_path, 'w', encoding="UTF8") as f:
+        for key, value in FileStorage.__objects.items():
+            dict1[key] = value.to_dict()
+        with open(FileStorage.__file_path, 'w', encoding="UTF8") as f:
             json.dump(dict1, f)
 
     def reload(self):
         """
         Reload the deserializes the JSON file
         """
-        if os.path.isfile(self.__file_path):
-            with open(self.__file_path, 'r', encoding="UTF8") as f:
-                __objects = json.load(f)
+        if os.path.isfile(FileStorage.__file_path):
+            with open(FileStorage.__file_path, 'r', encoding="UTF8") as f:
+                super_dict = json.load(f)
+            for key, value in super_dict.items():
+                FileStorage.__objects[key] = BaseModel(value)
