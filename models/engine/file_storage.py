@@ -5,9 +5,8 @@ File storage
 """
 import json
 import os.path
-from models.base_model import BaseModel
 
-class FileStorage():
+class FileStorage:
     """
     Class for file storage
     """
@@ -37,11 +36,12 @@ class FileStorage():
             json.dump(dict1, f)
 
     def reload(self):
+        from models.base_model import BaseModel
         """
         Reload the deserializes the JSON file
         """
         if os.path.isfile(FileStorage.__file_path):
-            with open(FileStorage.__file_path, 'r', encoding="UTF8") as f:
+            with open(FileStorage.__file_path, encoding="UTF8") as f:
                 super_dict = json.load(f)
             for key, value in super_dict.items():
-                FileStorage.__objects[key] = BaseModel(value)
+                FileStorage.__objects[key] = BaseModel(**value)
