@@ -8,6 +8,9 @@ import models
 
 
 class BaseModel:
+    """
+    Class for Base Model that is parent of all clasess
+    """
     def __init__(self, *args, **kwargs):
         """
         init method
@@ -18,17 +21,11 @@ class BaseModel:
             self.updated_at = datetime.now()
             models.storage.new(self)
         else:
+            kwargs['created_at'] = datetime.strptime(kwargs['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
+            kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
             for key, value in kwargs.items():
-                if key == 'created_at':
-                    self.created_at = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                if key == 'updated_at':
-                    self.updated_at = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                if key == 'my_number':
-                    self.my_number = value
-                if key == 'name':
-                    self.name = value
-                if key == 'id':
-                    self.id = value
+                if "__class__" not in key:
+                    setattr(self, key, value)
 
     def __str__(self):
         """
