@@ -8,13 +8,10 @@
 
 The AirBnB clone (hbnb), is a project in which the students of Holberton  deploy on a server a simple copy of the  [AirBnB website](https://intranet.hbtn.io/rltoken/FrRTcvuF5L9wWDzFE9k01A "AirBnB website"), in order to cover all fundamental concepts of the higher level programming track.
 
-
+The web application is composed by:
 <p>
 <img width="300" src="https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/8-index.png" align="right" >
 </p>
-
-The web application is composed by:
-
 -   A command interpreter to manipulate data without a visual interface, like in a Shell (perfect for development and debugging)
 -   A website (the front-end) that shows the final product to everybody: static and dynamic
 -   A database or files that store data (data = objects)
@@ -73,12 +70,10 @@ $
 ### Authors
 
 -   Emma Juliana Gachancipa Castelblanco
-
-[![alt text][1.1]][1][![alt text][2.1]][2][![alt text][3.1]][3][![alt text][4.1]][4]
+     [![alt text][1.1]][1][![alt text][2.1]][2][![alt text][3.1]][3][![alt text][4.1]][4]
 
 -   Juan Sebastian Montealegre Calle
-
-[![alt text][1.1]][5][![alt text][2.1]][6][![alt text][3.1]][7][![alt text][8.1]][8]
+          [![alt text][1.1]][5][![alt text][2.1]][6][![alt text][3.1]][7][![alt text][8.1]][8]
 
 [1.1]: http://i.imgur.com/tXSoThF.png (twitter icon with padding)
 [2.1]: http://i.imgur.com/P3YfQoD.png (facebook icon with padding)
