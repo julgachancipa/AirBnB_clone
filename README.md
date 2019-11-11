@@ -95,9 +95,9 @@ $
 
 [1]: http://www.twitter.com/julgachancipa
 [2]: http://www.facebook.com/emmajuliana.gachancipa
-[3]: https://plus.google.com/+CarlSednaoui
+[3]: https://www.github.com/julgachancipa
 [4]: https://www.linkedin.com/in/emma-juliana-gachancipa-castelblanco-4b3667188
 [5]: https://twitter.com/JSebastianCalle
 [6]: https://www.facebook.com/juansebastian.calle
-[7]: http://www.github.com/carlsednaoui
+[7]: http://www.github.com/SebastianCalle
 [8]: https://www.linkedin.com/in/juan-sebastián-montealegre-calle-3057155b
