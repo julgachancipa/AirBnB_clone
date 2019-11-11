@@ -76,8 +76,10 @@ class HBNBCommand(cmd.Cmd):
         else:
             storage = FileStorage()
             dict1 = storage.all()
+            list_obj = []
             for key, val in dict1.items():
-                print(val)
+                list_obj.append(str(val))
+            print(list_obj)
 
     def do_update(self, line):
         """Update an instances of BaseModel"""
@@ -88,14 +90,23 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(arg) < 2:
             print("** instance id missing **")
-        elif arg[1] != "id":
-            print("** no instance found **")
         elif len(arg) < 3:
             print("** attribute name missing **")
         elif len(arg) < 4:
             print("** value missing **")
         else:
-            print("update attribut", arg[2])
+            storage = FileStorage()
+            storage.reload()
+            dict1 = storage.all()
+            key = arg[0] + "." + arg[1]
+            obj = dict1.get(key)
+            if obj is None:
+                print("** no instance found **")
+            else:
+                setattr(obj, arg[2], eval(arg[3]))
+                dict1[key] = obj
+                print("ESTO ES DICT! ", dict1)
+                storage.save()
 
     def do_quit(self, line):
         """Quit command to exit the program
