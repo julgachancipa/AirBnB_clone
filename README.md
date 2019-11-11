@@ -10,7 +10,7 @@ The AirBnB clone (hbnb), is a project in which the students of Holberton  deploy
 
 The web application is composed by:
 <p>
-<img width="270" src="https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/8-index.png" align="left" >
+<img height="270" src="https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/8-index.png" align="left" >
 </p>
 
 -   A command interpreter to manipulate data without a visual interface, like in a Shell (perfect for development and debugging)
