@@ -13,8 +13,11 @@ The web application is composed by:
 <img width="300" src="https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/268/8-index.png" align="right" >
 </p>
 -   A command interpreter to manipulate data without a visual interface, like in a Shell (perfect for development and debugging)
+
 -   A website (the front-end) that shows the final product to everybody: static and dynamic
+
 -   A database or files that store data (data = objects)
+
 -   An API that provides a communication interface between the front-end and your data (retrieve, create, delete, update them)
 
 ## The console
@@ -22,10 +25,15 @@ The web application is composed by:
 The console is a command line interpreter but limited to a specific use-case. In this case it will be able to manage the objects of our AirBnb clone  project:
 
 -   Create a new object (ex: a new User or a new Place)
+
 -   Retrieve an object from a file, a database etc…
+
 -   Do operations on objects (count, compute stats, etc…)
+
 -   Update attributes of an object
+
 -   Destroy an object                                                                                
+
 ### Execution (How to start it?)
 The shell works like this in interactive mode:
 ```
@@ -69,11 +77,11 @@ $
 ### Examples
 ### Authors
 
--   Emma Juliana Gachancipa Castelblanco
+-   Emma Juliana Gachancipa Castelblanco...
      [![alt text][1.1]][1][![alt text][2.1]][2][![alt text][3.1]][3][![alt text][4.1]][4]
 
--   Juan Sebastian Montealegre Calle
-          [![alt text][1.1]][5][![alt text][2.1]][6][![alt text][3.1]][7][![alt text][8.1]][8]
+-   Juan Sebastian Montealegre Calle.......
+     [![alt text][1.1]][5][![alt text][2.1]][6][![alt text][3.1]][7][![alt text][8.1]][8]
 
 [1.1]: http://i.imgur.com/tXSoThF.png (twitter icon with padding)
 [2.1]: http://i.imgur.com/P3YfQoD.png (facebook icon with padding)
