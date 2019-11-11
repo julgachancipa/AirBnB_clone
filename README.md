@@ -69,8 +69,10 @@ $
 ### How to use it?
 ### Examples
 ### Authors
+
 Emma Juliana Gachancipa Castelblanco
 [![alt text][1.1]][1][![alt text][2.1]][2][![alt text][3.1]][3][![alt text][4.1]][4]
+
 Juan Sebastian Montealegre Calle
 [![alt text][1.1]][5][![alt text][2.1]][6][![alt text][3.1]][7][![alt text][8.1]][8]
 
