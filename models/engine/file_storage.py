@@ -42,7 +42,13 @@ class FileStorage:
         """
         Reload the deserializes the JSON file
         """
-        classes = {'BaseModel': BaseModel, 'User': User}
+        classes = {'BaseModel': BaseModel, 
+                   'User': User,
+                   'Place': Place,
+                   'State': State,
+                   'City': City,
+                   'Amenity': Amenity,
+                   'Review', Review}
         if os.path.isfile(FileStorage.__file_path):
             with open(FileStorage.__file_path, encoding="UTF8") as f:
                 super_dict = json.load(f)
