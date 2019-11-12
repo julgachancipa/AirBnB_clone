@@ -6,6 +6,7 @@ File storage
 import json
 import os.path
 
+
 class FileStorage:
     """
     Class for file storage
