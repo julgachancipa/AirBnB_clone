@@ -4,6 +4,8 @@ Console that is the entry point of the program
 """
 import cmd
 import sys
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -16,11 +18,13 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         """Create instance of BaseModel"""
         if len(line) == 0:
-            print("** class name missing **")
+            print("** class name missing **") 
         elif line != "BaseModel":
             print("** class doesn't exist **")
         else:
-            print("Create instance of", line)
+            new_instance = BaseModel()
+            print(new_instance.id)
+            new_instance.save()
 
     def do_show(self, line):
         """Show instance of BaseModel"""
@@ -32,7 +36,16 @@ class HBNBCommand(cmd.Cmd):
         elif len(arg) < 2:
             print("** instance id missing **")
         else:
-            print("Show instance of", arg[1])
+            storage = FileStorage()
+            dict1 = storage.all()
+            list_obj = list(dict1.values())
+            flag = 0
+            for obj in list_obj:
+                if obj.id == arg[1]:
+                    print(obj)
+                    flag = 1
+            if flag == 0:
+                print("** no instance found **")
 
     def do_destroy(self, line):
         """Destroy instance of BaseModel"""
@@ -43,14 +56,30 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(arg) < 2:
             print("** instance id missing **")
-        elif arg[1] != "id":
-            print("** no instance found **")
         else:
-            print("destroy instance of", arg[1])
+            storage = FileStorage()
+            storage.reload()
+            dict1 = storage.all()
+            key = arg[0] + "." + arg[1]
+            obj = dict1.get(key)
+            if obj is None:
+                print("** no instance found **")
+            else:
+                if obj.id == arg[1]:
+                    del dict1[key]
+            storage.save()
 
     def do_all(self, line):
         """Display all instances """
-        pass
+        if line != "BaseModel":
+            print("** class doesn't exist **")
+        else:
+            storage = FileStorage()
+            dict1 = storage.all()
+            list_obj = []
+            for key, val in dict1.items():
+                list_obj.append(str(val))
+            print(list_obj)
 
     def do_update(self, line):
         """Update an instances of BaseModel"""
@@ -61,14 +90,23 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(arg) < 2:
             print("** instance id missing **")
-        elif arg[1] != "id":
-            print("** no instance found **")
         elif len(arg) < 3:
             print("** attribute name missing **")
         elif len(arg) < 4:
             print("** value missing **")
         else:
-            print("update attribut", arg[2])
+            storage = FileStorage()
+            storage.reload()
+            dict1 = storage.all()
+            key = arg[0] + "." + arg[1]
+            obj = dict1.get(key)
+            if obj is None:
+                print("** no instance found **")
+            else:
+                setattr(obj, arg[2], eval(arg[3]))
+                dict1[key] = obj
+                print("ESTO ES DICT! ", dict1)
+                storage.save()
 
     def do_quit(self, line):
         """Quit command to exit the program
