@@ -62,6 +62,7 @@ i.e.
 Quit command to exit the program
 ```
 - **`quit`** and **`EOF`** to exit the program
+
 i.e.
 ```
 $ ./console.py
@@ -69,39 +70,50 @@ $ ./console.py
 $
 ```
 - **`create`**: Creates a new instance of `BaseModel`, saves it (to the JSON file) and prints the `id`.
+
 *Syntax:* `$ create [CLASS]`
+
 i.e.
 ```
 (hbnb) create BaseModel
 49faff9a-6318-451f-87b6-910505c55907
 ```
 - **`show`**: Prints the string representation of an instance based on the class name and `id`.
+
 *Syntax:* `$ show [CLASS] [ID]`
+
 i.e.
 ```
 (hbnb) show BaseModel 49faff9a-6318-451f-87b6-910505c55907
 [BaseModel] (49faff9a-6318-451f-87b6-910505c55907) {'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'id': '49faff9a-6318-451f-87b6-910505c55907', 'updated_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903300)}
 ```
 - **`destroy`**: Deletes an instance based on the class name and `id` (save the change into the JSON file).
+
 *Syntax:* `$ destroy [CLASS] [ID]`
+
 i.e.
 ```
 (hbnb) destroy BaseModel 49faff9a-6318-451f-87b6-910505c55907
 ```
 - **`all`**: Prints all string representation of all instances based or not on the class name.
+
 *Syntax:* `$ all [CLASS]` or `$ all`
+
 i.e.
 ```
 (hbnb) all BaseModel
 ["[BaseModel] (2dd6ef5c-467c-4f82-9521-a772ea7d84e9) {'id': '2dd6ef5c-467c-4f82-9521-a772ea7d84e9', 'created_at': datetime.datetime(2017, 10, 2, 3, 11, 23, 639717), 'updated_at': datetime.datetime(2017, 10, 2, 3, 11, 23, 639724)}", "[BaseModel] (49faff9a-6318-451f-87b6-910505c55907) {'first_name': 'Betty', 'id': '49faff9a-6318-451f-87b6-910505c55907', 'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'updated_at': datetime.datetime(2017, 10, 2, 3, 11, 3, 49401)}"]
 ```
 - **`update`**: Updates an instance based on the class name and `id` by adding or updating attribute (save the change into the JSON file).
-`$ update [CLASS] [ID] [ATTRIBUTE] [VALUE]`
+
+*Syntax:* `$ update [CLASS] [ID] [ATTRIBUTE] [VALUE]`
+
 i.e.
 ```
 (hbnb) update BaseModel 49faff9a-6318-451f-87b6-910505c55907 first_name "Betty"
 ```
 **If a command is missing an argument or it does not exist, a message will be displayed:**
+
 i.e.
 ```
 (hbnb) all MyModel
