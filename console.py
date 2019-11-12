@@ -95,15 +95,20 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         """Display all instances """
-        if line != "BaseModel":
-            print("** class doesn't exist **")
-        else:
+        if line in self.classes or line == "":
             storage = FileStorage()
             dict1 = storage.all()
             list_obj = []
             for key, val in dict1.items():
-                list_obj.append(str(val))
+                if line != "":
+                    instance = eval(line)
+                    if val.__class__ == instance:
+                        list_obj.append(str(val))
+                else:
+                    list_obj.append(str(val))
             print(list_obj)
+        else:
+            print("** class doesn't exist **")
 
     def do_update(self, line):
         """Update an instances of BaseModel"""
