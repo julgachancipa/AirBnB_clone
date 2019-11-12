@@ -4,6 +4,7 @@ Console that is the entry point of the program
 """
 import cmd
 import sys
+import shlex
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models.user import User
@@ -46,7 +47,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, line):
         """Show instance of BaseModel"""
-        arg = line.split()
+        arg = shlex.split(line)
         if len(line) == 0:
             print("** class name missing **")
         elif len(arg) < 2:
@@ -69,7 +70,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, line):
         """Destroy instance of BaseModel"""
-        arg = line.split()
+        arg = shlex.split(line)
         if len(line) == 0:
             print("** class name missing **")
             print("** class doesn't exist **")
@@ -112,7 +113,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """Update an instances of BaseModel"""
-        arg = line.split()
+        arg = shlex.split(line)
         if len(line) == 0:
             print("** class name missing **")
             print("** class doesn't exist **")
@@ -131,9 +132,8 @@ class HBNBCommand(cmd.Cmd):
                 obj = dict1.get(key)
                 if obj is not None:
                     instance = eval(arg[0])
-                    print("ENTRA ACA ")
                     if obj.id == arg[1] and instance == obj.__class__:
-                        setattr(obj, arg[2], eval(arg[3]))
+                        setattr(obj, arg[2], arg[3])
                         dict1[key] = obj
                         storage.save()
                     else:
@@ -151,7 +151,7 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         "Default method for line"
-        arg = line.split(".")
+        arg = shlex.split(line)
         if arg[0] in self.classes:
             if arg[1] == "all()":
                 command = arg[0]
