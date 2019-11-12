@@ -49,28 +49,29 @@ class HBNBCommand(cmd.Cmd):
         arg = line.split()
         if len(line) == 0:
             print("** class name missing **")
-        elif arg[0] != "BaseModel":
-            print("** class doesn't exist **")
         elif len(arg) < 2:
             print("** instance id missing **")
         else:
-            storage = FileStorage()
-            dict1 = storage.all()
-            list_obj = list(dict1.values())
-            flag = 0
-            for obj in list_obj:
-                if obj.id == arg[1]:
-                    print(obj)
-                    flag = 1
-            if flag == 0:
-                print("** no instance found **")
+            if arg[0] in self.classes:
+                storage = FileStorage()
+                dict1 = storage.all()
+                list_obj = list(dict1.values())
+                flag = 0
+                for obj in list_obj:
+                    instance = eval(arg[0])
+                    if obj.id == arg[1] and instance == obj.__class__:
+                        print(obj)
+                        flag = 1
+                if flag == 0:
+                    print("** no instance found **")
+            else:
+                print("** class doesn't exist **")
 
     def do_destroy(self, line):
         """Destroy instance of BaseModel"""
         arg = line.split()
         if len(line) == 0:
             print("** class name missing **")
-        elif arg[0] != "BaseModel":
             print("** class doesn't exist **")
         elif len(arg) < 2:
             print("** instance id missing **")
@@ -80,12 +81,17 @@ class HBNBCommand(cmd.Cmd):
             dict1 = storage.all()
             key = arg[0] + "." + arg[1]
             obj = dict1.get(key)
-            if obj is None:
+            if obj is not None:
+                instance = eval(arg[0])
+                if obj.id == arg[1] and instance == obj.__class__:
+                    del dict1[key]
+                else:
+                    print("** no instance found **")
+                storage.save()
+            elif arg[0] in self.classes:
                 print("** no instance found **")
             else:
-                if obj.id == arg[1]:
-                    del dict1[key]
-            storage.save()
+                print("** class doesn't exist **")
 
     def do_all(self, line):
         """Display all instances """
