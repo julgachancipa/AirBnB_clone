@@ -47,7 +47,7 @@ class FileStorage:
         """
         Reload the deserializes the JSON file
         """
-        classes = {'BaseModel': BaseModel, 
+        classes = {'BaseModel': BaseModel,
                    'User': User,
                    'Place': Place,
                    'State': State,

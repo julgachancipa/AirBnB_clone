@@ -4,6 +4,7 @@ Console that is the entry point of the program
 """
 import cmd
 import sys
+import shlex
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models.user import User
@@ -21,7 +22,7 @@ class HBNBCommand(cmd.Cmd):
     use_rawinput = False
 
     prompt = "(hbnb) "
-    classes = {'BaseModel': BaseModel, 
+    classes = {'BaseModel': BaseModel,
                'User': User,
                'Place': Place,
                'State': State,
@@ -32,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         """Create instance of BaseModel"""
         if len(line) == 0:
-            print("** class name missing **") 
+            print("** class name missing **")
             print("** class doesn't exist **")
         else:
             if line in self.classes:
@@ -40,13 +41,13 @@ class HBNBCommand(cmd.Cmd):
                 new_instance = inst()
                 print(new_instance.id)
                 new_instance.save()
+                self.count += 1
             else:
                 print("** class doesn't exist **")
 
-
     def do_show(self, line):
         """Show instance of BaseModel"""
-        arg = line.split()
+        arg = shlex.split(line)
         if len(line) == 0:
             print("** class name missing **")
         elif len(arg) < 2:
@@ -69,7 +70,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, line):
         """Destroy instance of BaseModel"""
-        arg = line.split()
+        arg = shlex.split(line)
         if len(line) == 0:
             print("** class name missing **")
             print("** class doesn't exist **")
@@ -112,7 +113,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """Update an instances of BaseModel"""
-        arg = line.split()
+        arg = shlex.split(line)
         if len(line) == 0:
             print("** class name missing **")
             print("** class doesn't exist **")
@@ -131,9 +132,8 @@ class HBNBCommand(cmd.Cmd):
                 obj = dict1.get(key)
                 if obj is not None:
                     instance = eval(arg[0])
-                    print("ENTRA ACA ")
                     if obj.id == arg[1] and instance == obj.__class__:
-                        setattr(obj, arg[2], eval(arg[3]))
+                        setattr(obj, arg[2], arg[3])
                         dict1[key] = obj
                         storage.save()
                     else:
@@ -151,16 +151,28 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         "Default method for line"
-        arg = line.split(".")
-        print(arg)
+        arg = shlex.split(line)
         if arg[0] in self.classes:
             if arg[1] == "all()":
                 command = arg[0]
                 self.do_all(command)
+            elif arg[1] == "count()":
+                command = eval(arg[0])
+                storage = FileStorage()
+                dict1 = storage.all()
+                count = 0
+                for key, val in dict1.items():
+                    if command == val.__class__:
+                        count += 1
+                print(count)
             else:
-                print("*** Unknown syntax:",line)
+                print("*** Unknown syntax:", line)
+
+
         else:
-            print("*** Unknown syntax:",line)
+            print("*** Unknown syntax:", line)
+
+
     def do_quit(self, line):
         """Quit command to exit the program
 
@@ -173,6 +185,7 @@ class HBNBCommand(cmd.Cmd):
         """
         print("")
         return True
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
