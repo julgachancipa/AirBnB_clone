@@ -105,7 +105,6 @@ class HBNBCommand(cmd.Cmd):
             else:
                 setattr(obj, arg[2], eval(arg[3]))
                 dict1[key] = obj
-                print("ESTO ES DICT! ", dict1)
                 storage.save()
 
     def do_quit(self, line):
