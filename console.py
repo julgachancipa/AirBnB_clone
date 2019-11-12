@@ -30,7 +30,9 @@ class HBNBCommand(cmd.Cmd):
                'Review': Review}
 
     def do_create(self, line):
-        """Create instance of BaseModel"""
+        """
+        Create instance of BaseModel
+        """
         if len(line) == 0:
             print("** class name missing **")
             print("** class doesn't exist **")
@@ -44,7 +46,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_show(self, line):
-        """Show instance of BaseModel"""
+        """
+        Show instance of BaseModel
+        """
         arg = line.split()
         if len(line) == 0:
             print("** class name missing **")
@@ -67,7 +71,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_destroy(self, line):
-        """Destroy instance of BaseModel"""
+        """
+        Destroy instance of BaseModel
+        """
         arg = line.split()
         if len(line) == 0:
             print("** class name missing **")
@@ -93,7 +99,9 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_all(self, line):
-        """Display all instances """
+        """
+        Display all instances
+        """
         if line in self.classes or line == "":
             storage = FileStorage()
             dict1 = storage.all()
@@ -110,7 +118,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, line):
-        """Update an instances of BaseModel"""
+        """
+        Update an instances of BaseModel
+        """
         arg = line.split()
         if len(line) == 0:
             print("** class name missing **")
@@ -149,7 +159,9 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def default(self, line):
-        "Default method for line"
+        """
+        Default method for line
+        """
         arg = line.split(".")
         if arg[0] in self.classes:
             if arg[1] == "all()":
@@ -161,14 +173,15 @@ class HBNBCommand(cmd.Cmd):
             print("*** Unknown syntax:", line)
 
     def do_quit(self, line):
-        """Quit command to exit the program
+        """
+        Quit command to exit the program
 
         """
         sys.exit(1)
 
     def do_EOF(self, line):
         """
-         Exit
+        Exit
         """
         print("")
         return True

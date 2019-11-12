@@ -45,10 +45,16 @@ class BaseModel:
                                       self.id, self.__dict__))
 
     def save(self):
+        """
+        Update the date
+        """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
+        """
+        Return a dict of the inst
+        """
         cpy_dict = dict(self.__dict__)
         cpy_dict['__class__'] = self.__class__.__name__
         cpy_dict['created_at'] = self.created_at.isoformat()
