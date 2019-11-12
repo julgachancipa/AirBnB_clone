@@ -110,7 +110,6 @@ class HBNBCommand(cmd.Cmd):
         arg = line.split()
         if len(line) == 0:
             print("** class name missing **")
-        elif arg[0] != "BaseModel":
             print("** class doesn't exist **")
         elif len(arg) < 2:
             print("** instance id missing **")
@@ -119,17 +118,25 @@ class HBNBCommand(cmd.Cmd):
         elif len(arg) < 4:
             print("** value missing **")
         else:
-            storage = FileStorage()
-            storage.reload()
-            dict1 = storage.all()
-            key = arg[0] + "." + arg[1]
-            obj = dict1.get(key)
-            if obj is None:
-                print("** no instance found **")
+            if arg[0] in self.classes:
+                storage = FileStorage()
+                storage.reload()
+                dict1 = storage.all()
+                key = arg[0] + "." + arg[1]
+                obj = dict1.get(key)
+                if obj is not None:
+                    instance = eval(arg[0])
+                    print("ENTRA ACA ")
+                    if obj.id == arg[1] and instance == obj.__class__:
+                        setattr(obj, arg[2], eval(arg[3]))
+                        dict1[key] = obj
+                        storage.save()
+                    else:
+                        print("** no instance found **")
+                elif arg[0] in self.classes:
+                    print("** no instance found **")
             else:
-                setattr(obj, arg[2], eval(arg[3]))
-                dict1[key] = obj
-                storage.save()
+                print("** class doesn't exist **")
 
     def emptyline(self):
         """
