@@ -131,6 +131,12 @@ class HBNBCommand(cmd.Cmd):
                 dict1[key] = obj
                 storage.save()
 
+    def emptyline(self):
+        """
+        empty line
+        """
+        pass
+
     def do_quit(self, line):
         """Quit command to exit the program
 
