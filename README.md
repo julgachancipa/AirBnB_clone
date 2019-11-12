@@ -39,43 +39,62 @@ The console is a command line interpreter but limited to a specific use-case. In
 The shell works like this in interactive mode:
 ```
 $ ./console.py
-(hbnb) help
-
-Documented commands (type help <topic>):
-========================================
-EOF  help  quit
-
-(hbnb) 
-(hbnb) 
-(hbnb) quit
-$
-
+(hbnb)
 ```
 
 But also in non-interactive mode:
 ```
 $ echo "help" | ./console.py
 (hbnb)
-
-Documented commands (type help <topic>):
-========================================
-EOF  help  quit
-(hbnb) 
-$
-$ cat test_help
-help
-$
-$ cat test_help | ./console.py
-(hbnb)
-
-Documented commands (type help <topic>):
-========================================
-EOF  help  quit
-(hbnb) 
-$
 ```
 ### How to use it?
-### Examples
+**NOTE:** you can use the ***help*** option with all the commands implemented to see the respective documentation.
+```
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+```
+i.e.
+```
+(hbnb) help quit
+Quit command to exit the program
+```
+- `quit` and `EOF` to exit the program
+```
+$ ./console.py
+(hbnb) quit 
+$
+```
+- `create`: Creates a new instance of `BaseModel`, saves it (to the JSON file) and prints the `id`.
+i.e.
+```
+(hbnb) create BaseModel
+49faff9a-6318-451f-87b6-910505c55907
+```
+- `show`: Prints the string representation of an instance based on the class name and `id`.
+i.e.
+```
+(hbnb) show BaseModel 49faff9a-6318-451f-87b6-910505c55907
+[BaseModel] (49faff9a-6318-451f-87b6-910505c55907) {'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'id': '49faff9a-6318-451f-87b6-910505c55907', 'updated_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903300)}
+```
+- `destroy`: Deletes an instance based on the class name and `id` (save the change into the JSON file).
+i.e.
+```
+(hbnb) destroy BaseModel 49faff9a-6318-451f-87b6-910505c55907
+```
+- `all`: Prints all string representation of all instances based or not on the class name.
+i.e.
+```
+(hbnb) all BaseModel
+["[BaseModel] (2dd6ef5c-467c-4f82-9521-a772ea7d84e9) {'id': '2dd6ef5c-467c-4f82-9521-a772ea7d84e9', 'created_at': datetime.datetime(2017, 10, 2, 3, 11, 23, 639717), 'updated_at': datetime.datetime(2017, 10, 2, 3, 11, 23, 639724)}", "[BaseModel] (49faff9a-6318-451f-87b6-910505c55907) {'first_name': 'Betty', 'id': '49faff9a-6318-451f-87b6-910505c55907', 'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'updated_at': datetime.datetime(2017, 10, 2, 3, 11, 3, 49401)}"]
+```
+- `update`: Updates an instance based on the class name and `id` by adding or updating attribute (save the change into the JSON file).
+i.e.
+```
+(hbnb) update BaseModel 49faff9a-6318-451f-87b6-910505c55907 first_name "Betty"
+```
 ### Authors
 
 -   Emma Juliana Gachancipa Castelblanco...
