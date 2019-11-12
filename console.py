@@ -152,7 +152,6 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         "Default method for line"
         arg = line.split(".")
-        print(arg)
         if arg[0] in self.classes:
             if arg[1] == "all()":
                 command = arg[0]
