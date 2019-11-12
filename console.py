@@ -149,6 +149,18 @@ class HBNBCommand(cmd.Cmd):
         """
         pass
 
+    def default(self, line):
+        "Default method for line"
+        arg = line.split(".")
+        print(arg)
+        if arg[0] in self.classes:
+            if arg[1] == "all()":
+                command = arg[0]
+                self.do_all(command)
+            else:
+                print("*** Unknown syntax:",line)
+        else:
+            print("*** Unknown syntax:",line)
     def do_quit(self, line):
         """Quit command to exit the program
 
@@ -161,7 +173,6 @@ class HBNBCommand(cmd.Cmd):
         """
         print("")
         return True
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
