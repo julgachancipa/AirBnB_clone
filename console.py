@@ -40,6 +40,7 @@ class HBNBCommand(cmd.Cmd):
                 new_instance = inst()
                 print(new_instance.id)
                 new_instance.save()
+                self.count += 1
             else:
                 print("** class doesn't exist **")
 
@@ -155,10 +156,22 @@ class HBNBCommand(cmd.Cmd):
             if arg[1] == "all()":
                 command = arg[0]
                 self.do_all(command)
+            elif arg[1] == "count()":
+                command = eval(arg[0])
+                storage = FileStorage()
+                dict1 = storage.all()
+                count = 0
+                for key, val in dict1.items():
+                    if command == val.__class__:
+                        count += 1
+                print(count)
             else:
                 print("*** Unknown syntax:", line)
+
+
         else:
             print("*** Unknown syntax:", line)
+
 
     def do_quit(self, line):
         """Quit command to exit the program
