@@ -6,6 +6,13 @@ import cmd
 import sys
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -14,17 +21,28 @@ class HBNBCommand(cmd.Cmd):
     use_rawinput = False
 
     prompt = "(hbnb) "
+    classes = {'BaseModel': BaseModel, 
+               'User': User,
+               'Place': Place,
+               'State': State,
+               'City': City,
+               'Amenity': Amenity,
+               'Review': Review}
 
     def do_create(self, line):
         """Create instance of BaseModel"""
         if len(line) == 0:
             print("** class name missing **") 
-        elif line != "BaseModel":
             print("** class doesn't exist **")
         else:
-            new_instance = BaseModel()
-            print(new_instance.id)
-            new_instance.save()
+            if line in self.classes:
+                inst = self.classes[line]
+                new_instance = inst()
+                print(new_instance.id)
+                new_instance.save()
+            else:
+                print("** class doesn't exist **")
+
 
     def do_show(self, line):
         """Show instance of BaseModel"""
