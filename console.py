@@ -21,7 +21,7 @@ class HBNBCommand(cmd.Cmd):
     use_rawinput = False
 
     prompt = "(hbnb) "
-    classes = {'BaseModel': BaseModel, 
+    classes = {'BaseModel': BaseModel,
                'User': User,
                'Place': Place,
                'State': State,
@@ -32,7 +32,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         """Create instance of BaseModel"""
         if len(line) == 0:
-            print("** class name missing **") 
+            print("** class name missing **")
             print("** class doesn't exist **")
         else:
             if line in self.classes:
@@ -42,7 +42,6 @@ class HBNBCommand(cmd.Cmd):
                 new_instance.save()
             else:
                 print("** class doesn't exist **")
-
 
     def do_show(self, line):
         """Show instance of BaseModel"""
@@ -157,9 +156,10 @@ class HBNBCommand(cmd.Cmd):
                 command = arg[0]
                 self.do_all(command)
             else:
-                print("*** Unknown syntax:",line)
+                print("*** Unknown syntax:", line)
         else:
-            print("*** Unknown syntax:",line)
+            print("*** Unknown syntax:", line)
+
     def do_quit(self, line):
         """Quit command to exit the program
 
@@ -172,6 +172,7 @@ class HBNBCommand(cmd.Cmd):
         """
         print("")
         return True
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
