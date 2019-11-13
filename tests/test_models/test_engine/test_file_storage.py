@@ -5,7 +5,7 @@ Unittest for file_storage
 import unittest
 from datetime import datetime
 from models.engine.file_storage import FileStorage
-
+from models.base_model import BaseModel
 
 class TestFileStorage(unittest.TestCase):
     """
@@ -15,5 +15,6 @@ class TestFileStorage(unittest.TestCase):
         """
         right cases
         """
-        my_object = FileStorage()
-        self.assertEqual(my_object.all, my_object.__objects)
+        my_storage = FileStorage()
+        my_dict = my_storage.all()
+        self.assertIs(type(my_dict), dict)
