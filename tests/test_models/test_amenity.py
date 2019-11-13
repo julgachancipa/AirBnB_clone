@@ -4,23 +4,23 @@ Unittest for base
 """
 import unittest
 from datetime import datetime
-from models.base_model import BaseModel
+from models.amenity import Amenity
 
 
-class TestBaseModelClass(unittest.TestCase):
+class TestAmenity(unittest.TestCase):
     """
-    Test Base Classes
+    Test Amenity
     """
     def test_right_cases(self):
         """
         right cases
         """
-        my_model = BaseModel()
+        my_model = Amenity()
+        self.assertEqual(my_model.__class__.__name__, "Amenity")
         my_model.name = "Holbi"
-        my_model.my_number = 89
         self.assertEqual(my_model.name, "Holbi")
+        my_model.my_number = 89
         self.assertEqual(my_model.my_number, 89)
-        self.assertEqual(my_model.__class__.__name__, "BaseModel")
         self.assertTrue(isinstance(my_model.created_at, datetime))
         self.assertTrue(isinstance(my_model.updated_at, datetime))
         my_model.save()

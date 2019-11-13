@@ -1,26 +1,26 @@
 #!/usr/bin/python3
 """
-Unittest for base
+Unittest for user
 """
 import unittest
 from datetime import datetime
-from models.base_model import BaseModel
+from models.user import User
 
 
 class TestBaseModelClass(unittest.TestCase):
     """
-    Test Base Classes
+    Test User
     """
     def test_right_cases(self):
         """
         right cases
         """
-        my_model = BaseModel()
+        my_model = User()
         my_model.name = "Holbi"
         my_model.my_number = 89
         self.assertEqual(my_model.name, "Holbi")
         self.assertEqual(my_model.my_number, 89)
-        self.assertEqual(my_model.__class__.__name__, "BaseModel")
+        self.assertEqual(my_model.__class__.__name__, "User")
         self.assertTrue(isinstance(my_model.created_at, datetime))
         self.assertTrue(isinstance(my_model.updated_at, datetime))
         my_model.save()
