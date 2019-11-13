@@ -4,6 +4,7 @@ Unittest for base
 """
 import unittest
 from datetime import datetime
+import uuid
 from models.base_model import BaseModel
 
 
@@ -27,3 +28,8 @@ class TestBaseModelClass(unittest.TestCase):
         self.assertTrue(isinstance(my_model.updated_at, datetime))
         my_model_dict = my_model.to_dict()
         self.assertIs(type(my_model_dict), dict)
+        self.assertIs(type(my_model.id), str)
+        self.assertIs(type(repr(my_model)), str)
+
+if __name__ == "__main__":
+    unittest.main()

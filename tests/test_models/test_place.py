@@ -27,3 +27,6 @@ class TestPlaceClass(unittest.TestCase):
         self.assertTrue(isinstance(my_model.updated_at, datetime))
         my_model_dict = my_model.to_dict()
         self.assertIs(type(my_model_dict), dict)
+
+if __name__ == "__main__":
+    unittest.main()
