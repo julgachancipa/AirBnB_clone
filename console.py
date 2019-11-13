@@ -140,7 +140,6 @@ class HBNBCommand(cmd.Cmd):
                 obj = dict1.get(key)
                 if obj is not None:
                     instance = eval(arg[0])
-                    print("ENTRA ACA ")
                     if obj.id == arg[1] and instance == obj.__class__:
                         setattr(obj, arg[2], eval(arg[3]))
                         dict1[key] = obj
@@ -167,6 +166,15 @@ class HBNBCommand(cmd.Cmd):
             if arg[1] == "all()":
                 command = arg[0]
                 self.do_all(command)
+            elif arg[1] == "count()":
+                command = eval(arg[0])
+                storage = FileStorage()
+                dict1 = storage.all()
+                count = 0
+                for key, val in dict1.items():
+                    if command == val.__class__:
+                        count += 1
+                print(count)
             else:
                 print("*** Unknown syntax:", line)
         else:
