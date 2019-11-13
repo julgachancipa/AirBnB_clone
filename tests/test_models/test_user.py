@@ -15,6 +15,7 @@ class TestBaseModelClass(unittest.TestCase):
         """
         right cases
         """
+        self.assertIsNotNone(User.__doc__)
         my_model = User()
         my_model.name = "Holbi"
         my_model.my_number = 89
@@ -22,6 +23,12 @@ class TestBaseModelClass(unittest.TestCase):
         my_model.last_name = "Gacast"
         my_model.email = "jul@ga.com"
         my_model.password = "root"
+        self.assertTrue(hasattr(my_model, "name"))
+        self.assertTrue(hasattr(my_model, "my_number"))
+        self.assertTrue(hasattr(my_model, "first_name"))
+        self.assertTrue(hasattr(my_model, "last_name"))
+        self.assertTrue(hasattr(my_model, "email"))
+        self.assertTrue(hasattr(my_model, "password"))
         self.assertEqual(my_model.name, "Holbi")
         self.assertEqual(my_model.my_number, 89)
         self.assertEqual(my_model.__class__.__name__, "User")
