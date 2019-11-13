@@ -37,7 +37,6 @@ class HBNBCommand(cmd.Cmd):
         """
         if len(line) == 0:
             print("** class name missing **")
-            print("** class doesn't exist **")
         else:
             if line in self.classes:
                 inst = self.classes[line]
@@ -52,7 +51,6 @@ class HBNBCommand(cmd.Cmd):
         Show instance of BaseModel
         """
         arg = line.split()
-        print(line)
         if len(line) == 0:
             print("** class name missing **")
         elif len(arg) < 2:
@@ -80,7 +78,6 @@ class HBNBCommand(cmd.Cmd):
         arg = line.split()
         if len(line) == 0:
             print("** class name missing **")
-            print("** class doesn't exist **")
         elif len(arg) < 2:
             print("** instance id missing **")
         else:
@@ -127,7 +124,6 @@ class HBNBCommand(cmd.Cmd):
         arg = shlex.split(line)
         if len(line) == 0:
             print("** class name missing **")
-            print("** class doesn't exist **")
         elif len(arg) < 2:
             print("** instance id missing **")
         elif len(arg) < 3:
@@ -144,6 +140,11 @@ class HBNBCommand(cmd.Cmd):
                 if obj is not None:
                     instance = eval(arg[0])
                     if obj.id == arg[1] and instance == obj.__class__:
+                        try:
+                            attr_type = type(getattr(obj, arg[2]))
+                            arg[3] = attr_type(arg[3])
+                        except AttributeError:
+                            pass
                         setattr(obj, arg[2], arg[3])
                         dict1[key] = obj
                         storage.save()
@@ -173,6 +174,7 @@ class HBNBCommand(cmd.Cmd):
         arg1 = re.split('[()]', arg[1])
         func = arg1[0]
         uid = ''
+        flag = 0
         if obj in self.classes:
             command = eval(arg[0])
             if func == 'all':
@@ -187,19 +189,29 @@ class HBNBCommand(cmd.Cmd):
                         count += 1
                 print(count)
             elif func in methods:
+                funtion = methods[func]
                 if func == 'update':
                     uid = eval(arg1[1])
                     new_list = list(uid)
+                    print(type(new_list[1]))
                     uid = new_list[0]
-                    attr = new_list[1]
-                    val = str(new_list[2])
-                    line = obj + " " + uid + " " + attr + " " + val
+                    if isinstance(new_list[1], dict):
+                        for key, value in new_list[1].items():
+                            attr = key
+                            val = str(value)
+                            line = obj + " " + uid + " " + attr + " " + val
+                            funtion(line)
+                            flag = 1
+                    else:
+                        attr = new_list[1]
+                        val = str(new_list[2])
+                        line = obj + " " + uid + " " + attr + " " + val
                 else:
                     if arg1[1] != '':
                         uid = eval(arg1[1])
                     line = obj + " " + uid
-                funtion = methods[func]
-                funtion(line)
+                if flag == 0:
+                    funtion(line)
             else:
                 print("*** Unknown syntax:", line)
         else:
