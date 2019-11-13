@@ -4,6 +4,8 @@ Console that is the entry point of the program
 """
 import cmd
 import sys
+import re
+import shlex
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models.user import User
@@ -50,6 +52,7 @@ class HBNBCommand(cmd.Cmd):
         Show instance of BaseModel
         """
         arg = line.split()
+        print(line)
         if len(line) == 0:
             print("** class name missing **")
         elif len(arg) < 2:
@@ -121,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
         """
         Update an instances of BaseModel
         """
-        arg = line.split()
+        arg = shlex.split(line)
         if len(line) == 0:
             print("** class name missing **")
             print("** class doesn't exist **")
@@ -141,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
                 if obj is not None:
                     instance = eval(arg[0])
                     if obj.id == arg[1] and instance == obj.__class__:
-                        setattr(obj, arg[2], eval(arg[3]))
+                        setattr(obj, arg[2], arg[3])
                         dict1[key] = obj
                         storage.save()
                     else:
@@ -161,13 +164,21 @@ class HBNBCommand(cmd.Cmd):
         """
         Default method for line
         """
-        arg = line.split(".")
-        if arg[0] in self.classes:
-            if arg[1] == "all()":
-                command = arg[0]
-                self.do_all(command)
-            elif arg[1] == "count()":
-                command = eval(arg[0])
+        methods = {'all': self.do_all,
+                   'show': self.do_show,
+                   'destroy': self.do_destroy,
+                   'update': self.do_update}
+        arg = re.split(r'\.', line)
+        obj = arg[0]
+        arg1 = re.split('[()]', arg[1])
+        func = arg1[0]
+        uid = ''
+        if obj in self.classes:
+            command = eval(arg[0])
+            if func == 'all':
+                funtion = methods[func]
+                funtion(obj)
+            elif func == "count":
                 storage = FileStorage()
                 dict1 = storage.all()
                 count = 0
@@ -175,6 +186,20 @@ class HBNBCommand(cmd.Cmd):
                     if command == val.__class__:
                         count += 1
                 print(count)
+            elif func in methods:
+                if func == 'update':
+                    uid = eval(arg1[1])
+                    new_list = list(uid)
+                    uid = new_list[0]
+                    attr = new_list[1]
+                    val = str(new_list[2])
+                    line = obj + " " + uid + " " + attr + " " + val
+                else:
+                    if arg1[1] != '':
+                        uid = eval(arg1[1])
+                    line = obj + " " + uid
+                funtion = methods[func]
+                funtion(line)
             else:
                 print("*** Unknown syntax:", line)
         else:
